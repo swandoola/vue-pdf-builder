@@ -1,7 +1,10 @@
 {
   "name": "v-pdf-builder",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "An HTML + CSS to PDF builder",
+  "repository": {
+    "url": "https://github.com/swandoola/vue-pdf-builder"
+  },
   "main": "dist/v-pdf-builder.ssr.js",
   "browser": "dist/v-pdf-builder.esm.js",
   "module": "dist/v-pdf-builder.esm.js",
