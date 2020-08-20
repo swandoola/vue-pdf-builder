@@ -10,7 +10,7 @@
       v-tooltip.bottom="'Delete this item'"
     >
       <button class="btn btn-xs btn-light noprint" @click="deleteItemFromCol(item)">
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
     <div :class="'text-' + item.options.align">
@@ -52,7 +52,7 @@
                   @click="saveAutoSuggestion"
                   v-tooltip.bottom="'Adds this passage of text to the auto-suggestion library, when you start typing this text next time the passage will be available for you to click and pre-populate.'"
                 >
-                  <i class="fad fa-save mr-2"></i>Save to Auto Suggestions
+                  <i class="far fa-save mr-2"></i>Save to Auto Suggestions
                 </button>
               </div>
             </div>

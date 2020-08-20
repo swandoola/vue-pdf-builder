@@ -10,7 +10,7 @@
       v-tooltip.bottom="'Delete this item'"
     >
       <button class="btn btn-xs btn-light noprint" @click="deleteItemFromCol(item)">
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
     <div :class="'text-' + item.options.align">

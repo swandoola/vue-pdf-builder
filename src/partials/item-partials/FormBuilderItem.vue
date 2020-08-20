@@ -9,7 +9,7 @@
     >
       <div class="row">
         <div class="col-2 text-center my-auto">
-          <i class="fad mr-2" :class="item.icon"></i>
+          <i class="far mr-2" :class="item.icon"></i>
         </div>
         <div class="col my-auto">{{ item.name }}</div>
       </div>

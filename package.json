@@ -17,7 +17,11 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "bootstrap": "^4.5.2",
+    "moment": "^2.27.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
@@ -30,6 +34,7 @@
     "minimist": "^1.2.5",
     "rollup": "^2.7.3",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-vue": "^5.1.6",
     "sass-loader": "^9.0.3",

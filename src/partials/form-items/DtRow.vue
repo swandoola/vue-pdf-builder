@@ -32,7 +32,7 @@
       <!--  -->
 
       <div class="row text-center p-3 align-items-center" v-if="row.items.length == 0">
-        <i class="fad fa-plus fa-10x mb-3"></i>
+        <i class="far fa-plus fa-10x mb-3"></i>
         <h5>Add item to row - click in to select</h5>
       </div>
     </div>
@@ -43,14 +43,14 @@
         v-tooltip.bottom="'Delete this row & all its items'"
         @click.stop="deleteRow(row)"
       >
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
   </div>
 </template>
 
 <script>
-import DtCol from "./DtCol";
+import DtCol from "@/partials/form-items/DtCol";
 
 export default {
   props: [

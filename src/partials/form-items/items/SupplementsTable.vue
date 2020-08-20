@@ -10,7 +10,7 @@
       v-tooltip.bottom="'Delete this item'"
     >
       <button class="btn btn-xs btn-light noprint" @click="deleteItemFromCol(item)">
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
     <div class="supplement-table-printing" :class="'text-' + item.options.align">
@@ -63,7 +63,7 @@
                   <td>£{{ i.price }}</td>
                   <td class="noprint">
                     <button class="btn btn-xs btn-light" @click="deleteTableRow(i)">
-                      <i class="fad fa-minus"></i>
+                      <i class="far fa-minus"></i>
                     </button>
                   </td>
                 </tr>

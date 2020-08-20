@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import CreateTemplate from "./partials/CreateTemplate";
-import FormArea from "./partials/FormArea";
-import FormBuilderItems from "./partials/FormBuilderItems";
-import FormBuilderOptions from "./partials/FormBuilderOptions";
-import HowTo from "./partials/HowTo";
+import CreateTemplate from "@/partials/CreateTemplate";
+import FormArea from "@/partials/FormArea";
+import FormBuilderItems from "@/partials/FormBuilderItems";
+import FormBuilderOptions from "@/partials/FormBuilderOptions";
+import HowTo from "@/partials/HowTo";
 
 export default {
   name: "VPdfBuilder",
@@ -120,7 +120,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+@import "./styles/app";
+
 .sticky-top {
   top: 1rem;
 }

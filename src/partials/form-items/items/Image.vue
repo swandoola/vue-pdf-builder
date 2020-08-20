@@ -10,7 +10,7 @@
       v-tooltip.bottom="'Delete this item'"
     >
       <button class="btn btn-xs btn-light noprint" @click="deleteItemFromCol(item)">
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
     <div :class="'text-' + item.options.align">
@@ -55,7 +55,7 @@ export default {
             .getAttributeNode("content").value,
         },
         dictDefaultMessage:
-          "<i class='fad fa-upload fa-4x text-primary'></i><br><br>Click here to select a file from your computer or drag n' drop a file to begin uploading",
+          "<i class='far fa-upload fa-4x text-primary'></i><br><br>Click here to select a file from your computer or drag n' drop a file to begin uploading",
       },
     };
   },

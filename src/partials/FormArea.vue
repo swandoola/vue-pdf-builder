@@ -11,14 +11,14 @@
           </div>
           <div class="col my-auto" v-else>
             <button @click="closeLoadedTemplate" class="btn btn-sm btn-light mr-3">
-              <i class="fad fa-times"></i>
+              <i class="far fa-times"></i>
             </button>
             <a
               :href="'/documents/' + $store.loadedTemplate.id + '/preview-as-pdf'"
               class="btn btn-sm btn-light mr-3"
               target="_blank"
             >
-              <i class="fad fa-file-pdf mr-2"></i>Preview PDF
+              <i class="far fa-file-pdf mr-2"></i>Preview PDF
             </a>
 
             <button
@@ -27,7 +27,7 @@
               v-tooltip.bottom="'Makes the PDF available in the client portal'"
             >
               <i
-                class="fad mr-2"
+                class="far mr-2"
                 :class="storeBusy ? 'fa-spinner fa-spin' : 'fa-file-pdf'"
                 :disabled="storeBusy"
               ></i>Store in client files
@@ -39,7 +39,7 @@
               @click="clearCurrentSelection"
               v-tooltip:bottom="'Selects the root page element. Does not clear document content.'"
             >
-              <i class="fad fa-times mr-2"></i>Reset Selection
+              <i class="far fa-times mr-2"></i>Reset Selection
             </button>
           </div>
         </div>
@@ -89,7 +89,7 @@
           </div>
           <div class="row my-5 text-center" v-if="templateItems.length == 0">
             <div class="col">
-              <i class="fad fa-info-circle fa-10x mb-3 text-primary"></i>
+              <i class="far fa-info-circle fa-10x mb-3 text-primary"></i>
               <p>To begin building your health report, drag a row on to the page.</p>
               <p>Add an item from the right into your row, such as a clinic logo or a passage of text</p>
               <p>Add one item per row, or add columns to rows to enhance the layout of your health report</p>
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import DtRow from "./form-items/DtRow";
+import DtRow from "@/partials/form-items/DtRow";
 import draggable from "vuedraggable";
 export default {
   props: [

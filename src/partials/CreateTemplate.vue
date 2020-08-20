@@ -12,7 +12,7 @@
               placeholder="An amazing title..."
             />
             <button class="btn btn-primary mt-4 float-right" @click="createTemplate">
-              <i class="fad fa-arrow-right mr-2"></i>Next
+              <i class="far fa-arrow-right mr-2"></i>Next
             </button>
           </div>
         </div>

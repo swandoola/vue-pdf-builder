@@ -6,7 +6,7 @@
           href="https://support.swandoola.com/faqs/how-to-create-a-health-report-template"
           target="_blank"
           class="btn btn-info btn-block btn-sm"
-        ><i class="fad fa-question mr-2"></i>Health Report How-To</a>
+        ><i class="far fa-question mr-2"></i>Health Report How-To</a>
       </div>
     </div>
   </div>

@@ -6,7 +6,9 @@ import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import babel from 'rollup-plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+import {
+  terser
+} from 'rollup-plugin-terser';
 import minimist from 'minimist';
 
 // Get browserslist config and remove ie from es build targets
@@ -39,6 +41,21 @@ const baseConfig = {
       template: {
         isProduction: true,
       },
+      style: {
+        preprocessOptions: {
+          scss: {
+            importer: [
+              function (url, prev) {
+                return {
+                  file: url
+                    .replace(/^~/, `${projectRoot}/node_modules/`)
+                    .replace(/^@/, `${projectRoot}/src/`), // ain't pretty, it can be easily improved
+                };
+              },
+            ],
+          },
+        },
+      }
     },
     babel: {
       exclude: 'node_modules/**',
@@ -92,7 +109,7 @@ if (!argv.format || argv.format === 'es') {
           ],
         ],
       }),
-      commonjs(),
+      commonjs()
     ],
   };
   buildFormats.push(esConfig);

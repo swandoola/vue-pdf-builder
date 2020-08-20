@@ -10,7 +10,7 @@
       style="position: absolute; top: 0rem; right: 0.15rem; z-index: 999;"
     >
       <button class="btn btn-xs btn-light noprint" @click="deleteCol(colKey)">
-        <i class="fad fa-trash"></i>
+        <i class="far fa-trash"></i>
       </button>
     </span>
     <template v-for="(c, cKey) in col.items">
@@ -154,16 +154,16 @@
 </template>
 
 <script>
-import UlList from "./items/UlList";
-import OlList from "./items/OlList";
-import TextArea from "./items/TextArea";
-import TextPassage from "./items/TextPassage";
-import ClinicLogo from "./items/ClinicLogo";
-import ImageSection from "./items/Image";
-import PractitionerName from "./items/PractitionerName";
-import ClientName from "./items/ClientName";
-import Heading from "./items/Heading";
-import SupplementsTable from "./items/SupplementsTable";
+import UlList from "@/partials/form-items/items/UlList";
+import OlList from "@/partials/form-items/items/OlList";
+import TextArea from "@/partials/form-items/items/TextArea";
+import TextPassage from "@/partials/form-items/items/TextPassage";
+import ClinicLogo from "@/partials/form-items/items/ClinicLogo";
+import ImageSection from "@/partials/form-items/items/Image";
+import PractitionerName from "@/partials/form-items/items/PractitionerName";
+import ClientName from "@/partials/form-items/items/ClientName";
+import Heading from "@/partials/form-items/items/Heading";
+import SupplementsTable from "@/partials/form-items/items/SupplementsTable";
 
 export default {
   props: [

@@ -18,13 +18,13 @@
           @click="clearCurrentSelection"
           v-tooltip:bottom="'Unselect whatever has been selected!'"
         >
-          <i class="fad fa-times mr-2"></i>Clear Selection
+          <i class="far fa-times mr-2"></i>Clear Selection
         </button>-->
 
         <div class="row text-center mt-4">
           <div class="col">
             <button class="btn btn-sm btn-light mb-3 noprint mr-3" @click="printPreview">
-              <i class="fad fa-print mr-2"></i>Preview
+              <i class="fas fa-print mr-2"></i>Preview
             </button>
 
             <button
@@ -32,7 +32,7 @@
               @click="saveTemplate"
               v-tooltip:bottom="'Auto-save is enabled - just in case!'"
             >
-              <i class="fad fa-check mr-2"></i>Save
+              <i class="fas fa-check mr-2"></i>Save
             </button>
 
             <button
@@ -42,7 +42,7 @@
               v-tooltip:bottom="'Save this as a PDF to the client profile!'"
               :disabled="busy"
             >
-              <i class="fad mr-2" :class="busy ? 'fa-spinner fa-spin' : 'fa-check'"></i>Save to Client Profile
+              <i class="fas mr-2" :class="busy ? 'fa-spinner fa-spin' : 'fa-check'"></i>Save to Client Profile
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import FormBuilderItem from "./item-partials/FormBuilderItem";
+import FormBuilderItem from "@/partials/item-partials/FormBuilderItem";
 export default {
   props: [
     "client",
