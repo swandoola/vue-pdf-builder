@@ -66,13 +66,7 @@
 
 <script>
 export default {
-  props: [
-    "currentSelectedRow",
-    "currentSelectedColKey",
-    "currentSelectedCol",
-    "currentSelectedItem",
-    "itemBeingDragged",
-  ],
+  props: ["currentSelectedItem"],
   data() {
     return {
       templateTitle: "",

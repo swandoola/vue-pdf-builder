@@ -25,7 +25,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></ul-list>
       <ol-list
         v-if="c.type == 'ol'"
@@ -38,7 +37,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></ol-list>
       <text-area
         v-if="c.type == 'text'"
@@ -51,7 +49,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></text-area>
 
       <text-passage
@@ -65,7 +62,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></text-passage>
       <heading
         v-if="c.type == 'heading'"
@@ -78,7 +74,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></heading>
       <clinic-logo
         v-if="c.type == 'logo'"
@@ -91,7 +86,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></clinic-logo>
 
       <image-section
@@ -105,7 +99,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></image-section>
       <practitioner-name
         v-if="c.type == 'practitioner-name'"
@@ -118,7 +111,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></practitioner-name>
       <client-name
         v-if="c.type == 'client-name'"
@@ -132,7 +124,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></client-name>
 
       <supplements-table
@@ -147,7 +138,6 @@
         :current-selected-col="currentSelectedCol"
         :current-selected-col-key="currentSelectedColKey"
         :current-selected-item="currentSelectedItem"
-        :item-being-dragged="itemBeingDragged"
       ></supplements-table>
     </template>
   </div>
@@ -173,7 +163,6 @@ export default {
     "inputView",
     "client",
     "templateItems",
-    "loadedTemplate",
     "currentSelectedRow",
     "currentSelectedColKey",
     "currentSelectedCol",
@@ -182,7 +171,8 @@ export default {
   ],
   methods: {
     selectThisItem(item) {
-      this.currentSelectedItem = item;
+      this.$emit("updateCurrentSelectedItem", item);
+      // this.currentSelectedItem = item;
     },
     deleteCol(colKey) {
       if (this.currentSelectedRow) {
@@ -203,10 +193,14 @@ export default {
       }
     },
     selectThisCol(colKey, col) {
-      this.currentSelectedCol = col;
-      this.currentSelectedColKey = colKey;
+      this.$emit("updateCurrentSelectedCol", col);
+
+      // this.currentSelectedCol = col;
+      this.$emit("updateCurrentSelectedColKey", colKey);
+      // this.currentSelectedColKey = colKey;
       if (this.currentSelectedCol.items.length == 0) {
-        this.currentSelectedItem = null;
+        this.$emit("updateCurrentSelectedItem", null);
+        // this.currentSelectedItem = null;
       }
     },
     checkColSelection(colId) {

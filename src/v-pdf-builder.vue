@@ -3,7 +3,12 @@
     <!--  -->
     <div class="row" v-if="!loadedTemplate">
       <div class="col-md-6 mx-auto">
-        <create-template :loaded-template="loadedTemplate" :template-items="templateItems"></create-template>
+        <create-template
+          :template-items="ti"
+          :loaded-template="lt"
+          @updateLoadedTemplate="updateLoadedTemplate"
+          @updateTemplateItems="updateTemplateItems"
+        ></create-template>
       </div>
     </div>
 
@@ -12,35 +17,39 @@
       <div class="col-md-9 page-area-print-wide w-100">
         <form-area
           :input-view="inputView"
-          :client="client"
-          :template-items="templateItems"
-          :loaded-template="loadedTemplate"
-          :current-selected-row="currentSelectedRow"
-          :current-selected-col="currentSelectedCol"
-          :current-selected-col-key="currentSelectedColKey"
-          :current-selected-item="currentSelectedItem"
-          :item-being-dragged="itemBeingDragged"
+          :client="c"
+          :template-items="ti"
+          :loaded-template="lt"
+          :current-selected-row="csr"
+          :current-selected-col="csc"
+          :current-selected-col-key="csck"
+          :current-selected-item="csi"
+          :item-being-dragged="ibd"
+          @addToTemplateItems="addToTemplateItems"
+          @updateLoadedTemplate="updateLoadedTemplate"
+          @updateTemplateItems="updateTemplateItems"
+          @updateItemBeingDragged="updateItemBeingDragged"
+          @updateCurrentSelectedRow="updateCurrentSelectedRow"
+          @updateCurrentSelectedCol="updateCurrentSelectedCol"
+          @updateCurrentSelectedColKey="updateCurrentSelectedColKey"
+          @updateCurrentSelectedItem="updateCurrentSelectedItem"
         ></form-area>
       </div>
       <div class="col-md-3 noprint">
         <div class="sticky-top" style="max-height: 90vh; overflow: scroll">
           <form-builder-options
             class="mb-3"
-            v-if="currentSelectedItem"
-            :current-selected-row="currentSelectedRow"
-            :current-selected-col="currentSelectedCol"
-            :current-selected-col-key="currentSelectedColKey"
-            :current-selected-item="currentSelectedItem"
-            :item-being-dragged="itemBeingDragged"
+            v-if="csi"
+            :current-selected-item="csi"
+            @updateCurrentSelectedItem="updateCurrentSelectedItem"
           ></form-builder-options>
           <form-builder-items
             class="mb-3"
-            :user="user"
-            :current-selected-row="currentSelectedRow"
-            :current-selected-col="currentSelectedCol"
-            :current-selected-col-key="currentSelectedColKey"
-            :current-selected-item="currentSelectedItem"
-            :item-being-dragged="itemBeingDragged"
+            :user="u"
+            :current-selected-row="csr"
+            :item-being-dragged="ibd"
+            @updateItemBeingDragged="updateItemBeingDragged"
+            @updateCurrentSelectedRow="updateCurrentSelectedRow"
           ></form-builder-items>
           <how-to></how-to>
         </div>
@@ -65,18 +74,27 @@ export default {
     "client",
 
     // Builder specific
-    "currentSelectedItem",
     "loadedTemplate",
     "templateItems",
+    "itemBeingDragged",
 
     "currentSelectedRow",
     "currentSelectedColKey",
     "currentSelectedCol",
     "currentSelectedItem",
-    "itemBeingDragged",
   ],
   data() {
-    return {};
+    return {
+      csi: this.currentSelectedItem,
+      lt: this.loadedTemplate,
+      ti: this.templateItems,
+      csr: this.currentSelectedRow,
+      csc: this.currentSelectedCol,
+      csck: this.currentSelectedColKey,
+      ibd: this.itemBeingDragged,
+      u: this.user,
+      c: this.client,
+    };
   },
   computed: {
     updateUrl() {
@@ -87,6 +105,62 @@ export default {
     },
   },
   methods: {
+    updateUser(data) {
+      this.u = data;
+      this.$emit("updateUser", this.u);
+    },
+
+    updateClient(data) {
+      this.c = data;
+      this.$emit("updateClient", this.c);
+    },
+
+    updateLoadedTemplate(data) {
+      this.lt = data;
+      this.$emit("updateLoadedTemplate", this.lt);
+    },
+
+    addToTemplateItems(data) {
+      this.ti.push(data);
+      this.$emit("updateTemplateItems", this.ti);
+    },
+
+    removeFromTemplateItems(data) {
+      this.ti.splice(data, 1);
+      this.$emit("updateTemplateItems", this.ti);
+    },
+
+    updateTemplateItems(data) {
+      this.ti = data;
+      this.$emit("updateTemplateItems", this.ti);
+    },
+
+    updateItemBeingDragged(data) {
+      this.ibd = data;
+      this.$emit("updateItemBeingDragged", this.ibd);
+    },
+
+    updateCurrentSelectedRow(data) {
+      this.csr = data;
+      this.$emit("updateCurrentSelectedRow", this.csr);
+    },
+
+    updateCurrentSelectedCol(data) {
+      this.csc = data;
+      this.$emit("updateCurrentSelectedCol", this.csc);
+    },
+
+    updateCurrentSelectedColKey(data) {
+      this.csck = data;
+      this.$emit("updateCurrentSelectedColKey", this.csck);
+    },
+
+    updateCurrentSelectedItem(data) {
+      this.csi = data;
+      this.$emit("updateCurrentSelectedItem", this.csi);
+    },
+
+    //
     updateTemplate() {
       window.axios
         .post(this.updateUrl, {
@@ -99,8 +173,10 @@ export default {
     },
     checkLoaded() {
       if (this.template != null) {
-        this.loadedTemplate = this.template;
-        this.templateItems = this.loadedTemplate.data;
+        this.updateLoadedTemplate(this.template);
+        this.updateTemplateItems(this.loadedTemplate.data);
+        // this.loadedTemplate = this.template;
+        // this.templateItems = this.loadedTemplate.data;
       }
     },
   },

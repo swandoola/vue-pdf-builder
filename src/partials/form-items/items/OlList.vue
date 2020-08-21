@@ -86,7 +86,6 @@ export default {
     "currentSelectedColKey",
     "currentSelectedCol",
     "currentSelectedItem",
-    "itemBeingDragged",
   ],
   data() {
     return {
@@ -150,17 +149,15 @@ export default {
       console.log("saveTemplate");
     },
     isTheItemSelected(itemId) {
-      if (
-        this.currentSelectedItem &&
-        this.currentSelectedItem.id == itemId
-      ) {
+      if (this.currentSelectedItem && this.currentSelectedItem.id == itemId) {
         return "border-danger";
       }
       return "border-light";
     },
     selectThisItem() {
-      this.currentSelectedItem = null;
-      this.currentSelectedItem = this.item;
+      this.$emit("updateCurrentSelectedItem", this.item);
+      // this.currentSelectedItem = null;
+      // this.currentSelectedItem = this.item;
     },
     deleteItemFromCol(item) {
       var data = {

@@ -87,7 +87,6 @@ export default {
     "currentSelectedColKey",
     "currentSelectedCol",
     "currentSelectedItem",
-    "itemBeingDragged",
   ],
   data() {
     return {
@@ -146,8 +145,9 @@ export default {
       return "border-light";
     },
     selectThisItem() {
-      this.currentSelectedItem = null;
-      this.currentSelectedItem = this.item;
+      this.$emit("updateCurrentSelectedItem", this.item);
+      // this.currentSelectedItem = null;
+      // this.currentSelectedItem = this.item;
     },
     deleteItemFromCol(item) {
       var data = {

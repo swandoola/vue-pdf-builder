@@ -24,6 +24,15 @@
               :current-selected-col-key="currentSelectedColKey"
               :current-selected-item="currentSelectedItem"
               :item-being-dragged="itemBeingDragged"
+              @removeFromTemplateItems="removeFromTemplateItems"
+              @addToTemplateItems="addToTemplateItems"
+              @updateLoadedTemplate="updateLoadedTemplate"
+              @updateTemplateItems="updateTemplateItems"
+              @updateItemBeingDragged="updateItemBeingDragged"
+              @updateCurrentSelectedRow="updateCurrentSelectedRow"
+              @updateCurrentSelectedCol="updateCurrentSelectedCol"
+              @updateCurrentSelectedColKey="updateCurrentSelectedColKey"
+              @updateCurrentSelectedItem="updateCurrentSelectedItem"
             ></dt-col>
             <!--  -->
           </template>
@@ -65,11 +74,39 @@ export default {
     "itemBeingDragged",
   ],
   data() {
-    return {
-      currentSelectedRow: this.currentSelectedRow,
-    };
+    return {};
   },
   methods: {
+    addToTemplateItems(data) {
+      this.$emit("updateTemplateItems", data);
+    },
+    removeFromTemplateItems(data) {
+      this.$emit("removeFromTemplateItems", data);
+    },
+    updateTemplateItems(data) {
+      this.$emit("updateTemplateItems", data);
+    },
+
+    updateItemBeingDragged(data) {
+      this.$emit("updateItemBeingDragged", data);
+    },
+
+    updateCurrentSelectedRow(data) {
+      this.$emit("updateCurrentSelectedRow", data);
+    },
+
+    updateCurrentSelectedCol(data) {
+      this.$emit("updateCurrentSelectedCol", data);
+    },
+
+    updateCurrentSelectedColKey(data) {
+      this.$emit("updateCurrentSelectedColKey", data);
+    },
+
+    updateCurrentSelectedItem(data) {
+      this.$emit("updateCurrentSelectedItem", data);
+    },
+    //
     deleteRow(row) {
       if (
         confirm(
@@ -79,20 +116,34 @@ export default {
         var indexToDelete = this.templateItems.findIndex(
           (x) => x.id === row.id
         );
-        this.templateItems.splice(indexToDelete, 1);
+        // this.templateItems.splice(indexToDelete, 1);
 
-        this.currentSelectedColKey = null;
-        this.currentSelectedCol = null;
-        this.currentSelectedItem = null;
-        this.currentSelectedRow = null;
+        this.$emit("removeFromTemplateItems", indexToDelete);
+
+        // this.currentSelectedColKey = null;
+        // this.currentSelectedCol = null;
+        // this.currentSelectedItem = null;
+        // this.currentSelectedRow = null;
+
+        this.$emit("updateCurrentSelectedRow", null);
+        this.$emit("updateCurrentSelectedCol", null);
+        this.$emit("updateCurrentSelectedColKey", null);
+        this.$emit("updateCurrentSelectedItem", null);
+
         console.log("saveTemplate");
       }
     },
     selectedRow() {
-      this.currentSelectedRow = this.row;
-      this.currentSelectedColKey = this.currentSelectedColKey
-        ? this.currentSelectedColKey
-        : 0;
+      this.$emit("updateCurrentSelectedRow", this.row);
+      // this.currentSelectedRow = this.row;
+      this.$emit(
+        "updateCurrentSelectedColKey",
+        this.currentSelectedColKey ? this.currentSelectedColKey : 0
+      );
+
+      // this.currentSelectedColKey = this.currentSelectedColKey
+      //   ? this.currentSelectedColKey
+      //   : 0;
     },
     isTheRowSelected() {
       if (

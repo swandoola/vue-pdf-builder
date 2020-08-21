@@ -81,6 +81,15 @@
                     :current-selected-col-key="currentSelectedColKey"
                     :current-selected-item="currentSelectedItem"
                     :item-being-dragged="itemBeingDragged"
+                    @removeFromTemplateItems="removeFromTemplateItems"
+                    @addToTemplateItems="addToTemplateItems"
+                    @updateLoadedTemplate="updateLoadedTemplate"
+                    @updateTemplateItems="updateTemplateItems"
+                    @updateItemBeingDragged="updateItemBeingDragged"
+                    @updateCurrentSelectedRow="updateCurrentSelectedRow"
+                    @updateCurrentSelectedCol="updateCurrentSelectedCol"
+                    @updateCurrentSelectedColKey="updateCurrentSelectedColKey"
+                    @updateCurrentSelectedItem="updateCurrentSelectedItem"
                   ></dt-row>
                   <!-- </div> -->
                 </li>
@@ -124,6 +133,35 @@ export default {
     };
   },
   methods: {
+    addToTemplateItems(data) {
+      this.$emit("updateTemplateItems", data);
+    },
+    removeFromTemplateItems(data) {
+      this.$emit("removeFromTemplateItems", data);
+    },
+    updateTemplateItems(data) {
+      this.$emit("updateTemplateItems", data);
+    },
+
+    updateItemBeingDragged(data) {
+      this.$emit("updateItemBeingDragged", data);
+    },
+
+    updateCurrentSelectedRow(data) {
+      this.$emit("updateCurrentSelectedRow", data);
+    },
+
+    updateCurrentSelectedCol(data) {
+      this.$emit("updateCurrentSelectedCol", data);
+    },
+
+    updateCurrentSelectedColKey(data) {
+      this.$emit("updateCurrentSelectedColKey", data);
+    },
+
+    updateCurrentSelectedItem(data) {
+      this.$emit("updateCurrentSelectedItem", data);
+    },
     closeLoadedTemplate() {
       console.log("closeLoadedTemplate");
       this.clearCurrentSelection();
@@ -150,10 +188,14 @@ export default {
     },
     clearCurrentSelection() {
       console.log("saveTemplate");
-      this.currentSelectedRow = null;
-      this.currentSelectedColKey = null;
-      this.currentSelectedCol = null;
-      this.currentSelectedItem = null;
+      this.$emit("updateCurrentSelectedRow", null);
+      this.$emit("updateCurrentSelectedCol", null);
+      this.$emit("updateCurrentSelectedColKey", null);
+      this.$emit("updateCurrentSelectedItem", null);
+      // this.currentSelectedRow = null;
+      // this.currentSelectedColKey = null;
+      // this.currentSelectedCol = null;
+      // this.currentSelectedItem = null;
     },
     dropItem(event) {
       if (this.itemBeingDragged) {
@@ -162,10 +204,14 @@ export default {
         var itemToBeAdded = _.cloneDeep(this.itemBeingDragged);
 
         if (itemToBeAdded.type == "row") {
-          this.currentSelectedColKey = null;
-          this.currentSelectedCol = null;
-          this.currentSelectedItem = null;
-          this.currentSelectedRow = null;
+          // this.currentSelectedColKey = null;
+          // this.currentSelectedCol = null;
+          // this.currentSelectedItem = null;
+          // this.currentSelectedRow = null;
+          this.$emit("updateCurrentSelectedRow", null);
+          this.$emit("updateCurrentSelectedCol", null);
+          this.$emit("updateCurrentSelectedColKey", null);
+          this.$emit("updateCurrentSelectedItem", null);
         }
 
         if (this.currentSelectedRow) {
@@ -194,21 +240,29 @@ export default {
             // Check if the row contains 3 or less cols
             if (rowToAddTo.length == 1 || rowToAddTo.length == 2) {
               var index = rowToAddTo.push(itemToBeAdded) - 1;
-              this.currentSelectedCol = itemToBeAdded;
-              this.currentSelectedColKey = index;
+
+              this.$emit("updateCurrentSelectedCol", itemToBeAdded);
+              this.$emit("updateCurrentSelectedColKey", index);
+              // this.currentSelectedCol = itemToBeAdded;
+              // this.currentSelectedColKey = index;
             }
           }
         } else {
           // If its just a row, add it
-          this.templateItems.push(itemToBeAdded);
-          this.currentSelectedRow = itemToBeAdded;
-          this.currentSelectedCol = itemToBeAdded.items[0];
-          this.currentSelectedColKey = 0;
+          this.$emit("addToTemplateItems", itemToBeAdded);
+          // this.templateItems.push(itemToBeAdded);
+          this.$emit("updateCurrentSelectedRow", itemToBeAdded);
+          // this.currentSelectedRow = itemToBeAdded;
+          this.$emit("updateCurrentSelectedCol", itemToBeAdded.items[0]);
+          // this.currentSelectedCol = itemToBeAdded.items[0];
+          this.$emit("updateCurrentSelectedColKey", 0);
+          // this.currentSelectedColKey = 0;
 
           this.scrollToRow(itemToBeAdded.id);
         }
 
         // Ready up for the next one
+        this.$emit("updateItemBeingDragged", null);
         this.itemBeingDragged = null;
         this.updateTemplate();
       }

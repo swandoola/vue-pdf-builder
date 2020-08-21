@@ -59,9 +59,6 @@ export default {
     "template",
     "user",
     "currentSelectedRow",
-    "currentSelectedColKey",
-    "currentSelectedCol",
-    "currentSelectedItem",
     "itemBeingDragged",
   ],
   data() {
@@ -302,16 +299,20 @@ export default {
       return true;
     },
     clearCurrentSelection() {
-      this.currentSelectedRow = null;
-      this.currentSelectedColKey = null;
-      this.currentSelectedCol = null;
-      this.currentSelectedItem = null;
+      this.$emit("updateCurrentSelectedRow", null);
+      this.$emit("updateCurrentSelectedCol", null);
+      this.$emit("updateCurrentSelectedColKey", null);
+      this.$emit("updateCurrentSelectedItem", null);
+      // this.currentSelectedRow = null;
+      // this.currentSelectedColKey = null;
+      // this.currentSelectedCol = null;
+      // this.currentSelectedItem = null;
     },
   },
   mounted() {
-    this.$on("clearSelectedTemplateItems", () => {
-      this.clearCurrentSelection;
-    });
+    // this.$on("clearSelectedTemplateItems", () => {
+    //   this.clearCurrentSelection;
+    // });
   },
   components: {
     FormBuilderItem,

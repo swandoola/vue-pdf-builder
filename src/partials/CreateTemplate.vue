@@ -36,8 +36,10 @@ export default {
           title: this.title,
         })
         .then(({ data }) => {
-          this.loadedTemplate = data.template;
-          this.templateItems = data.template.data;
+          this.$emit("updateLoadedTemplate", data.template);
+          // this.loadedTemplate = data.template;
+          this.$emit("updateTemplateItems", data.template.data);
+          // this.templateItems = data.template.data;
           console.log("alert", data);
         });
     },
