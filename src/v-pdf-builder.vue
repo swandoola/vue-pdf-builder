@@ -167,21 +167,22 @@ export default {
           data: this.templateItems,
         })
         .then(({ data }) => {
-          this.loadedTemplate = data.template;
+          this.$emit("updateLoadedTemplate", data.template);
+          // this.loadedTemplate = data.template;
           // console.log("alert", data);
         });
     },
     checkLoaded() {
       if (this.template != null) {
         this.updateLoadedTemplate(this.template);
-        this.updateTemplateItems(this.loadedTemplate.data);
+        // this.updateTemplateItems(this.loadedTemplate.data);
         // this.loadedTemplate = this.template;
         // this.templateItems = this.loadedTemplate.data;
       }
     },
   },
   mounted() {
-    this.checkLoaded();
+    // this.checkLoaded();
     this.$on("saveTemplate", () => {
       this.updateTemplate();
     });
