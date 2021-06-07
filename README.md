@@ -1,5 +1,8 @@
 # vue-pdf-builder
 
+(c) Swandoola Ltd 2021, All Rights Reserved.
+ 
+
 A Vue component for building PDFs from HTML.
 
 ## Installation
